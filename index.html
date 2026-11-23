@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEXORA task dashboard — add, organize and track your tasks in one calm, focused workspace.">
+  <meta name="theme-color" content="#f4f6fb">
+  <title>NEXORA — Task Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    try {
+      var savedTheme = localStorage.getItem("nexora.theme.v1");
+      if (savedTheme !== "light" && savedTheme !== "dark") {
+        savedTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = savedTheme;
+    } catch (error) {}
+  </script>
+</head>
+<body>
+
+  <!-- Icon sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="1.5" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22.5"/><line x1="3.5" y1="3.5" x2="5.2" y2="5.2"/><line x1="18.8" y1="18.8" x2="20.5" y2="20.5"/><line x1="1.5" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22.5" y2="12"/><line x1="3.5" y1="20.5" x2="5.2" y2="18.8"/><line x1="18.8" y1="5.2" x2="20.5" y2="3.5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><polyline points="22 4 12 14 9 11"/></symbol>
+    <symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="index.html" aria-label="NEXORA Digital Agency — task dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17V7l10 10V7"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">NEXORA</span>
+          <span class="brand-tag">Digital Agency</span>
+        </span>
+      </a>
+
+      <div class="header-tools">
+        <div class="search">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="searchInput" type="search" placeholder="Search tasks" aria-label="Search tasks" autocomplete="off" spellcheck="false">
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </div>
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Toggle color theme">
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+        <button class="btn btn-primary" id="openAddTask" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+          <span>New task</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell page">
+    <section class="page-head">
+      <div>
+        <p class="eyebrow">NEXORA workspace</p>
+        <h1>Task dashboard</h1>
+        <p class="page-sub">A clear view of what needs your attention today.</p>
+      </div>
+      <div class="date-chip">
+        <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+        <span id="todayLabel">—</span>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Task overview">
+      <article class="stat-card">
+        <span class="stat-icon tint-indigo"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>
+        <p class="stat-value" id="statTotal">0</p>
+        <p class="stat-label">Total tasks</p>
+        <p class="stat-hint">Everything in your workspace</p>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon tint-slate"><svg class="icon" aria-hidden="true"><use href="#i-circle"/></svg></span>
+        <p class="stat-value" id="statTodo">0</p>
+        <p class="stat-label">To do</p>
+        <p class="stat-hint">Ready to be picked up</p>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon tint-blue"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+        <p class="stat-value" id="statProgress">0</p>
+        <p class="stat-label">In progress</p>
+        <p class="stat-hint">Currently in motion</p>
+      </article>
+      <article class="stat-card">
+        <span class="stat-icon tint-green"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+        <p class="stat-value" id="statPercent">0%</p>
+        <p class="stat-label">Completion</p>
+        <div class="mini-progress" role="progressbar" aria-label="Completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+          <span id="progressBar" style="width:0%"></span>
+        </div>
+        <p class="stat-hint" id="statCaption">0 of 0 tasks done</p>
+      </article>
+    </section>
+
+    <section class="board" aria-label="Tasks">
+      <div class="board-toolbar">
+        <div class="tabs" role="group" aria-label="Filter tasks by status">
+          <button class="tab" type="button" data-status="all" aria-pressed="true">All <span class="count" data-count="all">0</span></button>
+          <button class="tab" type="button" data-status="todo" aria-pressed="false">To do <span class="count" data-count="todo">0</span></button>
+          <button class="tab" type="button" data-status="progress" aria-pressed="false">In progress <span class="count" data-count="progress">0</span></button>
+          <button class="tab" type="button" data-status="done" aria-pressed="false">Done <span class="count" data-count="done">0</span></button>
+        </div>
+
+        <div class="toolbar-end">
+          <div class="select-wrap">
+            <label class="sr-only" for="priorityFilter">Filter by priority</label>
+            <select class="select" id="priorityFilter">
+              <option value="all">All priorities</option>
+              <option value="high">High priority</option>
+              <option value="medium">Medium priority</option>
+              <option value="low">Low priority</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label class="sr-only" for="sortSelect">Sort tasks</label>
+            <select class="select" id="sortSelect">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="due">Due date</option>
+              <option value="priority">Priority</option>
+              <option value="title">Title A–Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <ul class="task-list" id="taskList"></ul>
+      <div class="empty" id="emptyState" hidden></div>
+      <p class="sr-only" role="status" aria-live="polite" id="resultsSummary"></p>
+    </section>
+
+    <footer class="site-footer">
+      Made for <strong>NEXORA DIGITAL AGENCY</strong> · © 2026
+    </footer>
+  </main>
+
+  <!-- Add / edit task dialog -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow" id="modalEyebrow">Plan your next move</p>
+          <h2 id="modalTitle">New task</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close-modal aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+
+      <form class="task-form" id="taskForm" novalidate>
+        <div class="field">
+          <label for="taskTitleInput">Task title <span class="req" aria-hidden="true">*</span></label>
+          <input id="taskTitleInput" name="title" type="text" maxlength="90" required autocomplete="off" placeholder="e.g. Design the landing page hero">
+          <p class="field-error" id="titleError" hidden>Please add a title for this task.</p>
+        </div>
+
+        <div class="field">
+          <div class="label-row">
+            <label for="taskDescInput">Description</label>
+            <span class="counter" id="descCount">0 / 240</span>
+          </div>
+          <textarea id="taskDescInput" name="description" rows="3" maxlength="240" placeholder="Add a little context so future you knows what to do."></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="taskStatusInput">Status</label>
+            <div class="select-wrap">
+              <select id="taskStatusInput" name="status">
+                <option value="todo">To do</option>
+                <option value="progress">In progress</option>
+                <option value="done">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="taskPriorityInput">Priority</label>
+            <div class="select-wrap">
+              <select id="taskPriorityInput" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="taskDueInput">Due date</label>
+            <input id="taskDueInput" name="due" type="date">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-ghost" type="button" data-close-modal>Cancel</button>
+          <button class="btn btn-primary" type="submit" id="submitTask">Create task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
