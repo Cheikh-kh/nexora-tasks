@@ -2,6 +2,8 @@
 
 A calm, focused task management dashboard built with plain **HTML, CSS and JavaScript** for **NEXORA DIGITAL AGENCY**.
 
+**Live demo:** https://cheikh-kh.github.io/nexora-tasks/
+
 ## Features
 
 - Add, edit and delete tasks through an accessible modal
